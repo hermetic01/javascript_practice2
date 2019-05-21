@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+        <meta name="keywords" content="关键词">
+        <meta name="description" content="描述">
+        <meta name="author" content="Linjian">
+        <style>
+            body{font-family: "Microsoft YaHei",serif;}
+            body,dl,dd,p,h1,h2,h3,h4,h5,h6{margin:0;}
+            ol,ul,li{margin:0;padding:0;list-style:none;}
+            img{border:none;}
+        
+        </style>
+    </head>
+    <body>
+
+        <script>
+            let a = setInterval(function(){
+                console.log("a");
+            },1000);
+            let b = setInterval(function(){
+                console.log("b");
+            },1000);
+            let c = setInterval(function(){
+                console.log("c");
+            },1000);
+            let d = setInterval(function(){
+                console.log("d");
+            },1000);
+
+            console.log(a,b,c,d);
+            //
+            // 定时器的返回值是 该定时器的编号
+            // 编号只与定时器出现的顺序有关。
+
+
+            clearTimeout( b );//clearTimeout( 2 );一个意思
+            // 清除定时器
+            //在当前页面里面的不同作用域里的计时器 不影响排列顺序
+        </script>
+    </body>
+</html>

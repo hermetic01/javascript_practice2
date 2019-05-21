@@ -1,0 +1,207 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+        <meta name="keywords" content="关键词">
+        <meta name="description" content="描述">
+        <meta name="author" content="Linjian">
+        <style>
+            body{font-family: "Microsoft YaHei",serif;}
+            body,dl,dd,p,h1,h2,h3,h4,h5,h6{margin:0;}
+            ol,ul,li{margin:0;padding:0;list-style:none;}
+            img{border:none;}
+            #wrap{
+                width:650px;
+                height:500px;
+                margin:50px auto;
+                border:1px solid red;
+                /*不会被鼠标选中文本*/
+                user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+            }
+            .imgbox{
+                position:relative;
+                width:100%;
+                height:420px;
+                overflow:hidden;
+            }
+            #wrap .imgbox #list{
+                position: absolute;
+                left:0;
+                transition:left 0.5s;
+                width:400%;
+                height:420px;
+            }
+            #wrap .imgbox #list li{
+                width:650px;
+                height:420px;
+                float:left;
+            }
+            #wrap .imgbox #list li img{
+                width:100%;
+                height:420px;
+
+            }
+            #wrap .imgbox .dec{
+                position: absolute;
+                width:100%;
+                height:30px;
+                color:#fff;
+                line-height:30px;
+                text-align:center;
+                font-size:14px;
+                background-color:rgba(0,0,0,.5);
+            }
+            #wrap .imgbox .dec1{
+                top:0;
+            }
+            #wrap .imgbox .dec2{
+                bottom:0;
+            }
+            #wrap .imgbox .btn{
+                position:absolute;
+                top:50%;
+                margin-top:-20px;
+                height:40px;
+                width:40px;
+                font-size:15px;
+                line-height:40px;
+                text-align:center;
+                background-color: rgba(0,0,0,.5);
+                color:#fff;
+                font-weight:bolder;
+                cursor:pointer;
+            }
+            #wrap .imgbox .btnLetf{
+                left:0;
+            }
+            #wrap .imgbox .btnRight{
+                right:0;
+            }
+            #wrap .tab{
+                width:100%;
+                height:30px;
+                margin-top:20px;
+                text-align:center;
+            }
+            #wrap .tab p {
+                display: inline-block;
+                width:100px;
+                height:30px;
+                line-height:30px;
+                text-align:center;
+                font-size:8px;
+                color:#fff;
+                background-color: rgba(5, 9, 6, 0.71);
+                cursor:pointer;
+            }
+            #wrap .tab p.active{
+                background-color: #ff9e46;
+                border: 1px solid red;
+            }
+
+        </style>
+    </head>
+    <body>
+        <div id="wrap">
+        <!--显示图片的模块-->
+            <div class="imgbox">
+                <ul id="list">
+                    <li><img src="img/1.jpg" alt=""></li>
+                    <li><img src="img/2.jpg" alt=""></li>
+                    <li><img src="img/3.jpg" alt=""></li>
+                    <li><img src="img/4.jpg" alt=""></li>
+                </ul>
+                <!--上下描述区域-->
+                <p class="dec dec1">1/999</p>
+                <p class="dec dec2">这是第一张图片</p>
+                <!--左右切换按钮区域-->
+                <div class="btn btnLetf"><</div>
+                <div class="btn btnRight">></div>
+            </div>
+        <!--显示切换按钮的模块-->
+
+            <div class="tab">
+                <p class="active">轮播模式</p>
+                <p>循环模式</p>
+            </div>
+        </div>
+        <script>
+            let aBtn = document.getElementsByClassName("btn"),
+                aImgList = document.getElementById("list"),
+                aDec = document.getElementsByClassName("dec"),
+                aTab = document.querySelectorAll("#wrap .tab p"),
+                piclength = document.querySelectorAll("#list li").length,
+                pictext = ["不好看","不好看2","不好看3","不好看4"];
+                picindex = 0,
+                modtype = 0,
+                timeclock=undefined;
+
+            function reflash() { //统一刷新页面
+                aImgList.style.left = "-"+picindex*100+"%";
+                aDec[0].innerHTML=picindex+1+"/"+piclength;
+                console.log(aDec[1].innerHTML);
+                aDec[1].innerHTML=pictext[picindex];
+            }
+
+            reflash();
+            //左边按钮
+                aBtn[0].onclick = function () {
+                    if(--picindex<=0)
+                        modtype ===0? (picindex = 0):(picindex = piclength-1);
+                    reflash();
+                }
+            //右边按钮
+                aBtn[1].onclick = function rBtnF() {
+                    if(++picindex > piclength-1)
+                        modtype ===0?  picindex=piclength-1: picindex=0;
+                    reflash();
+                }
+
+
+            //底部模式按钮`
+            /**CLASS开关
+             *   给所有的数组对象来一次toggle；
+             * @param arr     arr
+             * @param tClass  str   标签名称
+             */
+                function toggleSwitch(arr,tClass) {
+                    arr.forEach(function (value) {
+                        value.classList.toggle(tClass);
+                    })
+                }
+                aTab[0].onclick = function () {
+                    modtype === 0||toggleSwitch(aTab,"active");
+                    modtype = 0;
+                    clearInterval(timeclock);
+                }
+                aTab[1].onclick = function () {
+                    modtype === 1||toggleSwitch(aTab,"active");
+                    modtype = 1;
+                    timeclock = setInterval(function(){
+                        if(++picindex > piclength-1)
+                            modtype ===0?  picindex=piclength-1: picindex=0;
+                            reflash();
+                            },4000);
+                }
+
+                aImgList.onmouseenter = function() {
+                    if(modtype === 1)clearInterval(timeclock);
+                }
+                aImgList.onmouseleave =function() {
+                    if(modtype === 1)
+                        timeclock = setInterval(function(){
+                            if(++picindex > piclength-1)
+                                modtype ===0?  picindex=piclength-1: picindex=0;
+                            reflash();
+                        },4000);;
+                }
+            console.log(aBtn);
+            console.log(aImgList);
+            console.log(aDec);
+            console.log(aTab);
+        </script>
+    </body>
+</html>

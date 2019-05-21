@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+        <meta name="keywords" content="关键词">
+        <meta name="description" content="描述">
+        <meta name="author" content="Linjian">
+        <style>
+            body{font-family: "Microsoft YaHei",serif;}
+            body,dl,dd,p,h1,h2,h3,h4,h5,h6{margin:0;}
+            ol,ul,li{margin:0;padding:0;list-style:none;}
+            img{border:none;}
+            #wrap{
+                width:400px;
+                margin:50px auto;
+            }
+            #input{
+                width: 100%;
+                margin:0px auto;
+            }
+            #textarea1{
+                width: 394px;
+                height:200px;
+                font-size:15px;
+                font-family: "Microsoft YaHei",serif;
+                resize:none;
+            }
+            #list{
+                margin-top:30px;
+            }
+            #list li{
+                font-size:30px;
+                text-index:2em;
+                line-height:30px;
+                border-bottom:1px dotted #999;
+                margin:5px 0px;
+            }
+
+        </style>
+    </head>
+    <body>
+        <div id="wrap">
+            <div id="input">
+                <textarea  id="textarea1"></textarea>
+                <button id="btn">提交</button>
+            </div>
+            <ul id="list">
+
+            </ul>
+        </div>
+        <script>
+            let oArea = document.getElementById("textarea1"),
+                oBtn  = document.getElementById("btn"),
+                oList = document.getElementById("list");
+
+            oBtn.onclick = function () {
+               let val = oArea.value;
+               console.log(val);
+               oList.innerHTML += "<li>"+val+"</li>"
+               oArea.value="";
+
+            };
+
+        </script>
+    </body>
+</html>

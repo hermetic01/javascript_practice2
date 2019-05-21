@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+        <meta name="keywords" content="关键词">
+        <meta name="description" content="描述">
+        <meta name="author" content="Linjian">
+        <style>
+            body{font-family: "Microsoft YaHei",serif;}
+            body,dl,dd,p,h1,h2,h3,h4,h5,h6{margin:0;}
+            ol,ul,li{margin:0;padding:0;list-style:none;}
+            img{border:none;}
+        
+        </style>
+    </head>
+    <body>
+
+        <script>
+            let num = 0;
+            let js1 = "num = 100; console.log(num);"
+            let fan = function (){
+                console.log(++num);
+
+                return fan;
+            }
+
+            setTimeout(fan(),3000);
+            setTimeout(js1,1000);
+
+            // 这是一个计时器，时间到后会自动执行一段代码。
+            // 第一个参数是执行的内容，第二个是等待的时间（毫秒）
+            // 第一个参数可以是一个函数，也可以是一段包含了JavaScript代码的字符串。
+        </script>
+    </body>
+</html>

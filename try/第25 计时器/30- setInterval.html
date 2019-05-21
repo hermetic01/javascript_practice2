@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+        <meta name="keywords" content="关键词">
+        <meta name="description" content="描述">
+        <meta name="author" content="Linjian">
+        <style>
+            body{font-family: "Microsoft YaHei",serif;}
+            body,dl,dd,p,h1,h2,h3,h4,h5,h6{margin:0;}
+            ol,ul,li{margin:0;padding:0;list-style:none;}
+            img{border:none;}
+        
+        </style>
+    </head>
+    <body>
+
+        <script>
+            let num = 0;
+            let fn1 = function (a,b) {
+                console.log(a+b);
+            };
+
+            setInterval(fn1,1000,2,5);
+            //第一个实参写 fn1(2,3) 便直接执行了，不能这么写。
+            //从第三个参数开始填写的是第一个函数的参数。setTimeout同理
+            //最快执行速度并不能达到1秒1000次。
+            // 每个浏览器的速度不一样，约1秒60次。
+        </script>
+    </body>
+</html>
